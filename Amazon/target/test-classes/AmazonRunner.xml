@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Amazon" parallel="tests">
+
+    <test name="AmazonFeatures">
+        <parameter name="platform" value="Win"/>
+        <parameter name="platformVersion" value="10"/>
+        <parameter name="browserName" value="Chrome"/>
+        <parameter name="browserVersion" value="61.0"/>
+        <parameter name="url" value="https://www.amazon.com/"/>
+        <parameter name="pathForReports" value="../Amazon/reports/result1"/>
+
+        <classes>
+            <class name="TestAmazon.TestAmazonHomePage"></class>
+           <!--<class name="TestAmazon.TestSearch"></class>-->
+
+        </classes>
+    </test>
+</suite>

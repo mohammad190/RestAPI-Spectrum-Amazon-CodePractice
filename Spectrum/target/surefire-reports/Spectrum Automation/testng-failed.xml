@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" verbose="0" name="Failed suite [Spectrum Automation]" parallel="tests">
+  <parameter name="Path" value="../Spectrum/screenshot"/>
+  <parameter name="platformVersion" value="10"/>
+  <parameter name="browserVersion" value="63.0"/>
+  <parameter name="pathForReports" value="reports/tests"/>
+  <parameter name="browserName" value="chrome"/>
+  <parameter name="platform" value="Win"/>
+  <parameter name="url" value="https://www.amazon.com/"/>
+  <test name="Spectrum Automation(failed)" parallel="tests">
+    <classes>
+      <class name="Home.HomePage">
+        <methods>
+          <include name="testMethod"/>
+          <include name="close_Browser"/>
+          <include name="setUp"/>
+        </methods>
+      </class> <!-- Home.HomePage -->
+    </classes>
+  </test> <!-- Spectrum Automation(failed) -->
+</suite> <!-- Failed suite [Spectrum Automation] -->
