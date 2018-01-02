@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name = "BankOFAmerica Automation" parallel="tests">
+
+    <parameter name="platform" value="Win"/>
+    <parameter name="platformVersion" value="10"/>
+    <parameter name="browserName" value="chrome"/>
+    <parameter name="browserVersion" value="63.0"/>
+    <parameter name="url" value="https://www.BankOfAmerica.com/"/>
+    <parameter name="pathForReports" value="reports/tests"/>
+    <parameter name="Path" value="../BankOfAmerica/screenshot/"/>
+
+    <test name="Bank Automation">
+        <classes>
+            <class name="TestMenu.TestBanking"></class>
+        </classes>
+    </test>
+
+</suite>

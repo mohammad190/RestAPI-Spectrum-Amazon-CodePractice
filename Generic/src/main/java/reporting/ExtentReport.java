@@ -8,7 +8,7 @@ public class ExtentReport {
             ExtentReports extent;
             String Path = reportFileName + ".html";
             extent = new ExtentReports(Path, true);
-            extent.addSystemInfo("Host", "Sujon").addSystemInfo("Environment", "QA Tester")
+            extent.addSystemInfo("Host", "Mohammad Ali").addSystemInfo("Environment", "QA")
                     .addSystemInfo("Framework", "Hybrid");
             return extent;
         }

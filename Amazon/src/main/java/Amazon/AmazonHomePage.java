@@ -4,18 +4,29 @@ import base.CommonAPI;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.io.IOException;
+
 public class AmazonHomePage extends CommonAPI {
 
-    @FindBy(linkText = "Today's Deals")
-    WebElement Click_TodaysDeals;
+    @FindBy(xpath = ".//a[@id='nav-link-accountList']")
+    WebElement Click_Hello_SignIn;
 
-    @FindBy(linkText = "Sell")
-    WebElement Click_Sell;
+    @FindBy(id = "ap_email")
+    WebElement ClickEmail;
 
-    public void TodayDealsFeatures(){
-        Click_TodaysDeals.click();
-        Click_Sell.click();
+    @FindBy(id = "ap_password")
+    WebElement ClickPassword;
+
+    @FindBy(id = "signInSubmit")
+    WebElement ClickSignBTN;
 
 
+
+    public void LoginFeatures(String email, String password) {
+        waitUntilClickable(Click_Hello_SignIn);
+       Click_Hello_SignIn.click();
+       ClickEmail.sendKeys(email);
+       ClickPassword.sendKeys(password);
+       ClickSignBTN.click();
     }
 }

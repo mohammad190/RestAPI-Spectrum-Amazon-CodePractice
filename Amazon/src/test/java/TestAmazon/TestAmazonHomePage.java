@@ -7,22 +7,17 @@ import base.CommonAPI;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+
 public class TestAmazonHomePage extends CommonAPI {
 
     @Test
-    public void TodayDealsFeature(){
+    public void Login() throws IOException {
 
-        AmazonHomePage AHP = PageFactory.initElements(driver,AmazonHomePage.class);
-        AHP.TodayDealsFeatures();
-        Search search = PageFactory.initElements(driver, Search.class);
-        search.searchFeatures("Books","Laptop","Dress","Games","Deals","Gifts");
+        AmazonHomePage homePage = PageFactory.initElements(driver,AmazonHomePage.class);
+        homePage.LoginFeatures("sujondpi@yahoo.com","Sujon123");
+        takeScreenShot(driver,"AfterTest","C:\\Users\\sujon\\IdeaProjects\\TuesdayGroupAutomation\\Amazon\\screenshot\\");
 
-//        search.searchFeatures1("");
-//        search.searchFeatures2("Eelectronics");
-//        search.searchFeatures3("Phone");
-//        search.searchFeatures4("Movie");
-//        search.searchFeatures5("Coupons");
-        YourAmazon yourAmazon = PageFactory.initElements(driver,YourAmazon.class);
-        yourAmazon.YourAmazonFeatures("abcdefgh@gmail.com","abcdedf12345678");
+
     }
 }

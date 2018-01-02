@@ -30,7 +30,7 @@ public class ValidateResponse {
                 .statusCode(200)
                 .and()
                 //.body("rows[0].elements[0].distance.text",equalTo("1,527 km"))
-                .body("rows[1].elements[1].duration.value",equalTo(16651))
+                .body("rows[1].elements[1].duration.value",equalTo(17044))
                 .contentType(ContentType.JSON);
     }
 }

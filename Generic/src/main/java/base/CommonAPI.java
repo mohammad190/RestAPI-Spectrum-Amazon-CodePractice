@@ -3,21 +3,19 @@ package base;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import com.relevantcodes.extentreports.LogStatus;
-import com.sun.jna.platform.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 import reporting.ExtentReport;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.concurrent.TimeUnit;
 
 public class CommonAPI {
@@ -27,18 +25,19 @@ public class CommonAPI {
 
     public static WebDriver driver;
 
-    @Parameters({"platform", "platformVersion", "browserName", "browserVersion", "url", "pathForReports"})
+    @Parameters({"platform", "platformVersion", "browserName", "browserVersion", "url", "pathForReports", "directoryPath"})
     @BeforeMethod
     public void setUp(@Optional String platform, @Optional String platformVersion,
                       @Optional String browserName, @Optional String browserVersion,
-                      @Optional String url, @Optional String pathForReports) throws Exception {
+                      @Optional String url, @Optional String pathForReports, @Optional String directoryPath) throws Exception {
 
         get_Local_Driver(platform, browserName, pathForReports);
-        driver.manage().window().maximize();
+
         test.log(LogStatus.INFO, "Windows Maximized");
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         driver.navigate().to(url);
+        driver.manage().window().maximize();
         test.log(LogStatus.INFO, "Navigate to Url");
     }
 
@@ -79,18 +78,29 @@ public class CommonAPI {
         }
         return driver;
     }
+//    @AfterMethod
+//    public void tearUP(){
+//        driver.close();
+//    }
 
-    @Parameters({"Path"})
+    @Parameters({"directoryPath"})
     @AfterMethod
     public void close_Browser(ITestResult testResult, @Optional String directoryPath) throws IOException {
 
         String path = null;
         String imagePath = null;
 
-        if(testResult.getStatus() != ITestResult.SUCCESS) {
+        if (testResult.getStatus() == ITestResult.SUCCESS) {
             path = takeScreenShot(driver, testResult.getName(), directoryPath);
             imagePath = test.addScreenCapture(path);
             test.log(LogStatus.PASS, "pass test cases", imagePath);
+            driver.quit();
+            reports.endTest(test);
+            reports.flush();
+        } else if (testResult.getStatus() == ITestResult.FAILURE) {
+            path = takeScreenShot(driver, testResult.getName(), directoryPath);
+            imagePath = test.addScreenCapture(path);
+            test.log(LogStatus.FAIL, "fail test cases", imagePath);
             driver.quit();
             reports.endTest(test);
             reports.flush();
@@ -100,11 +110,27 @@ public class CommonAPI {
             reports.flush();
         }
     }
+
     public String takeScreenShot(WebDriver driver, String fileName, String Path) throws IOException {
         fileName = fileName + ".png";
-        File sourceFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File sourceFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         org.apache.commons.io.FileUtils.copyFile(sourceFile, new File(Path + fileName));
         String destination = Path + fileName;
         return destination;
+    }
+
+    public void waitUntilClickable(WebElement locator) {
+        WebDriverWait wait = new WebDriverWait(driver, 1);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public void okAlert() throws InterruptedException {
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+    }
+
+    public void cancelAlert() throws InterruptedException {
+        Alert alert = driver.switchTo().alert();
+        alert.dismiss();
     }
 }

@@ -25,7 +25,7 @@ public class TestHomePages extends CommonAPI {
             Thread.sleep(1000);
             searchBar.clear();
             Thread.sleep(1000);
-            takeScreenShot(driver, "AfterCaseStatus", "../Spectrum/screenshot");
+            takeScreenShot(driver, "AfterCaseStatus", "../Spectrum/screenshot//");
             test.log(LogStatus.INFO,"Take screen shot after run the method");
         }
     }

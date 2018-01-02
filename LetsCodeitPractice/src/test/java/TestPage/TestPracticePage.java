@@ -17,14 +17,14 @@ public class TestPracticePage extends CommonAPI {
         homePage.practiceBTN();
         PracticePage pg = PageFactory.initElements(driver,PracticePage.class);
         test.log(LogStatus.INFO,"Practice test pass");
-        pg.RadioButton();
-        pg.SelectCar();
-        pg.SelectFruit();
-        pg.CarFeatures();
-         pg.NewWindow();
-        pg.openTab();
-        pg.handleDisplayedElem();
-        pg.cancelAlert();
-        pg.okAlert();
+        //pg.RadioButton();
+        //pg.SelectCar();
+        //pg.SelectFruit();
+        //pg.CarFeatures();
+        //pg.NewWindow();
+        //pg.openTab();
+        //pg.handleDisplayedElem();
+        //pg.cancelAlert();
+        //pg.okAlert();
     }
 }

@@ -14,6 +14,10 @@
         <module>RestPractice</module>
         <module>LetsCodeitPractice</module>
         <module>Amazon</module>
+        <module>WellsFergo</module>
+        <module>BankOfAmerica</module>
+        <module>Youtube</module>
+        <module>MellanBank</module>
     </modules>
     <dependencyManagement>
     <dependencies>
@@ -72,8 +76,5 @@
             </plugin>
         </plugins>
     </build>
-
-
-
 
 </project>
